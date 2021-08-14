@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container" id="test">
+    <div class="row my-5 justify-content-center">
+        <div class="col-6">
+            <div class="card">
+                <div class="card-body g-1">
+                    <div class="text-end border rounded-3 align-middle p-2">
+                        <h3 class="mb-0">{{ result }}</h3>
+                    </div>
+                    <div class="row my-2 g-1">
+                        <div class="col-6">
+                            <input type="number" v-model.number="input1" class="form-control">
+                        </div>
+                        <div class="col-6">
+                            <input type="number" v-model.number="input2" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row g-1">
+                        <div class="col-6">
+                            <button class="btn btn-outline-primary w-100" @click="calculate()">Calculate</button>
+                        </div>
+                        <div class="col-6">
+                            <button class="btn btn-primary w-100" @click="save()">Save</button>
+                        </div>
+                    </div>
+                    <ul>
+                        <li v-for="history in histories">{{ history }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../vue.js"></script>
+<script>
+
+    let app = new Vue({
+        el : "#test",
+        data : {
+            result : 0,
+            input1 : "",
+            input2 : "",
+            histories : [],
+        },
+        methods : {
+            calculate(){
+                return this.result = this.input1 + this.input2;
+            },
+            save(){
+                this.histories.push(this.result);
+                this.input2 = "";
+                this.input1 = "";
+                this.result = 0;
+
+
+            }
+        },
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<div id="test">
+
+    <h1>{{ name }}</h1>
+    <p>length - {{nameLength}}</p>
+    <p>start - {{startLetterOfName}}</p>
+    <p>reverse - {{nameReverse}}</p>
+    <p>short - {{nameShort}}</p>
+</div>
+
+<script src="../vue.js"></script>
+<script>
+
+    let app = new Vue({
+
+        el : "#test",
+        data : {
+            name : "kyaw zin latt",
+        },
+        computed : {
+            nameLength(){
+                return this.name.length;
+            },
+            startLetterOfName(){
+                return this.name[0];
+            },
+            nameReverse(){
+                let nameArr = this.name.split("");
+                let nameArrToRev = nameArr.reverse();
+                let result = nameArrToRev.join("");
+                return result;
+            },
+            nameShort(){
+                let nameArr = this.name.split(" ");
+                let result = nameArr.map(el=>el[0]).join("").toUpperCase();
+                return result;
+            }
+        }
+
+    })
+
+</script>
+</body>
+</html>

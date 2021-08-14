@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<div id="test">
+    <h1>{{ number }}</h1>
+    <p v-if="number > 5">Vue</p>
+    <p v-else-if="number < 2">Vue is</p>
+    <button @click="run()">Click</button>
+</div>
+
+<script src="../vue.js"></script>
+<script>
+
+let test = new Vue({
+    el : "#test",
+    data: {
+        number : "0",
+    } ,
+    methods : {
+        run() {
+            this.number = Math.random().toFixed(1) * 10;
+        }
+    }
+
+})
+
+</script>
+</body>
+</html>

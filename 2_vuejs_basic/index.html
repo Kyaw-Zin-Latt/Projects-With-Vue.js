@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .rotate{
+            transform: rotate(10deg);
+        }
+        .red-color{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <h4>{{ name.split(" ") }}</h4>
+    {{ message }}
+    <h1 :class="[rotate,redColor]">
+<!--        //v-bind use for attribute.':' short hand-->
+        I am <span v-bind:title="name" >KZL</span>
+    </h1>
+</div>
+
+<script src="../vue.js"></script>
+<script>
+
+
+
+    //vue instance
+    let app = new Vue({
+        el : '#app',
+        data : {
+            name : 'kyaw zin latt',
+            message : 'hello vue',
+            rotate : "rotate",
+            redColor : "red-color",
+        }
+    });
+
+</script>
+</body>
+</html>

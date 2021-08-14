@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        table{
+            margin-top: 10px;
+            width: 500px;
+        }
+        tbody,tr,th,td{
+
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+
+<div id="test">
+    <h4>Fruits List &nbsp;&nbsp;&nbsp; <span>{{total}}</span></h4>
+
+<!--    <h4>{{ newItem }}</h4>-->
+    <input type="text" v-model="newItemName">
+    <input type="number" v-model.number="newItemPrice" @keyup.enter="add()">
+    <button @click="add()">Add</button>
+
+    <table>
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="item in items" @dblclick="edit()">
+            <td>{{ item.id }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.price }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+
+<script src="../vue.js"></script>
+<script>
+    let app = new Vue({
+        el : "#test",
+        data :{
+            newItemName : "",
+            newItemPrice : "",
+            items : [
+                {id:1,name:"apple",price:300},
+                {id:2,name:"orange",price:400},
+                {id:3,name:"banana",price:100},
+            ],
+        },
+        computed : {
+            total(){
+               return this.items.length;
+            }
+        },
+        methods : {
+            add(){
+
+                this.items.push({
+                    id:this.items.length+1,
+                    name:this.newItemName,
+                    price:this.newItemPrice,
+                });
+                this.newItemName = "";
+                this.newItemPrice = "";
+            },
+            edit(){
+                alert("Edited");
+            }
+        }
+
+    })
+</script>
+</body>
+</html>

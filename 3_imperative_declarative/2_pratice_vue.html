@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container" id="test">
+    <div class="row my-5">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-3">
+                        <h1>{{ text }}</h1>
+                        <button @click="del()" class="btn btn-outline-danger">Del</button>
+                    </div>
+                    <div class="row g-2">
+                        <div v-for="arr in arrs" @click="[add(arr.name),arr.isPress = true]" :class="['col-4 border py-4 text-center rounded-3',{'bg-light':arr.isPress}]">
+                            <h4 class="mb-0" >{{ arr.name }}</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../vue.js"></script>
+<script>
+
+    let app = new Vue({
+        el : "#test",
+        data : {
+            text : "",
+            arrs : [
+                {name : "we", isPress : false},
+                {name : "want", isPress : false},
+                {name : "our", isPress : false},
+                {name : "leader", isPress : false},
+                {name : "must", isPress : false},
+                {name : "win", isPress : false},
+                {name : "democracy", isPress : false},
+                {name : "justice", isPress : false},
+                {name : "need", isPress : false},
+                {name : "we", isPress : false},
+                {name : "we", isPress : false},
+                {name : "we", isPress : false},
+
+            ],
+        },
+        methods : {
+            add(x){
+                this.text += x + " ";
+            },
+            del(){
+                this.text = "";
+                let newArr = [];
+                this.arrs.map(el=>{
+                    newArr.push({name:el.name, isPress:false});
+                });
+                this.arrs = newArr;
+            }
+        },
+    })
+</script>
+</body>
+</html>

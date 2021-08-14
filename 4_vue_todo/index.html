@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../node_modules/animate.css/animate.min.css">
+    <link rel="stylesheet" href="../fontawesome-free/css/all.css">
+    <style>
+        .done{
+            text-decoration: line-through !important;
+            animation: 0.5s shakeX;
+        }
+        .created{
+            animation: 0.5s fadeInDown;
+        }
+        .deleted{
+            animation: 0.5s fadeOutUp;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container" id="test">
+    <div class="row my-5 justify-content-center">
+
+        <div class="col-md-5 col-8 p-0">
+            <div class="d-flex">
+                <div class="col-md-10 col-12 me-2">
+                    <input type="text" class="form-control" @keyup.enter="add()" v-model="inputText" required>
+                </div>
+                <button class="btn btn-outline-primary w-100" @click="add()">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </div>
+            <div class="d-flex justify-content-between my-3">
+                <p class="fw-bolder">To Do List{{ arrs.length > 1 ? "s" : "" }}</p>
+                <p v-if="doneTotal === arrs.length && arrs.length > 0" class="badge bg-success rounded-pill">All Done <i class="fas fa-check-circle"></i></p>
+                <p v-else class="badge bg-primary rounded-pill">Done {{ doneTotal }}</p>
+            </div>
+            <div>
+                <ul class="list-group list-unstyled">
+                    <li @dblclick="arr.isEdit = true" :class="['created border rounded p-2 d-flex justify-content-between align-items-center',{'deleted':arr.isDelete}]" :key="arr.id" v-for="arr in arrs">
+                        <input v-if="arr.isEdit" type="text" @keyup.enter="arr.isEdit = false" v-model="arr.message" class="form-control">
+                        <div v-else class="form-check">
+                            <input class="form-check-input" v-model="arr.isDone" type="checkbox" value=""  :id="'flexCheck'+arr.id">
+                            <label :class="['form-check-label',{'done':arr.isDone}]" :for="'flexCheck'+arr.id">
+                                {{ arr.message }}
+                            </label>
+                        </div>
+                        <button @click="[arr.isDelete=true,del(arr.id)]" class="btn btn-outline-danger" ><i class="fas fa-trash-alt"></i></button>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<script src="../vue.js"></script>
+<script>
+    let app = new Vue({
+        el : "#test",
+        data : {
+            arrs : [],
+            currentId : 0,
+            inputText : "",
+            todoText : "",
+        },
+        computed : {
+          doneTotal(){
+              return this.arrs.filter(el => el.isDone === true).length;
+          }
+        },
+        methods : {
+
+            add(){
+                this.currentId++
+                this.arrs.push({
+                    id : this.currentId,
+                    message : this.inputText,
+                    isDone : false,
+                    isEdit : false,
+                    isDelete : false,
+                });
+                this.inputText = "";
+            },
+            del(x){
+                setTimeout(()=>this.arrs =  this.arrs.filter(el => el.id !== x),500)
+            }
+        },
+    })
+</script>
+</body>
+</html>
