@@ -1,10 +1,10 @@
 <template>
-    $END$
+    <h1 class="text-center align-middle">404 Not Found</h1>
 </template>
 
 <script>
     export default {
-        name: "Navbar"
+        name: "NotFound"
     }
 </script>
 

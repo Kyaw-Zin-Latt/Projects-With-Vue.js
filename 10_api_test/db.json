@@ -1,0 +1,11 @@
+{
+  "posts": [
+    { "id": 1, "title": "Html", "author": "kyawzinlatt" },
+    { "id": 2, "title": "Css", "author": "eaintchuemon" },
+    { "id": 3, "title": "Js", "author": "heinhtetzan" }
+  ],
+  "comments": [
+    { "id": 1, "body": "some comment", "postId": 1 }
+  ],
+  "profile": { "name": "typicode" }
+}

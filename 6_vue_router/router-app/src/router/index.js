@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import Contact from "../views/Contact";
 
 Vue.use(VueRouter);
 
@@ -19,12 +20,19 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
+  {
+    path: "/contact-us",
+    name: "Contact",
+    alias: "/contact",
+    component: Contact,
+  }
 ];
 
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes,
+  linkExactActiveClass : "active",
 });
 
 export default router;
