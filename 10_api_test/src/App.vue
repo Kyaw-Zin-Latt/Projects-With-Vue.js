@@ -1,8 +1,14 @@
 <template>
   <div id="app">
-    <div id="nav rounded">
+    <div class="container-fluid position-fixed bg-primary" style="z-index: 999999;">
+      <div class="row">
+        <div class="col-12">
+          <div class="container">
+            <div class="row">
+              <div class="col-12">
+                 <div id="nav rounded">
 
-      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary position-sticky">
   <div class="container">
     <a class="navbar-brand" href="#">Navbar</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,13 +27,19 @@
   </div>
 </nav>
     </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="container">
       <div class="row">
-        <div class="col-12">
+        <div class="col-12 mt-5">
           <div class="container justify-content-center">
             <div class="">
               <router-view>
-                  
+
               </router-view>
             </div>
           </div>
@@ -53,8 +65,9 @@ $font-family-sans-serif: 'Montserrat', sans-serif;
   }
 }
 
-nav .active {
-  color: black !important;
+.nav-link.active {
+  font-weight: bold;
+  color: #2c3e50 !important;
 }
 
 .navbar-brand img {
@@ -76,11 +89,6 @@ nav .active {
   z-index: 1005;
 }
 
-.nav-link.active {
-  //border: 1px solid var(--bs-primary);
-  color: var(--bs-primary) !important;
-  background: transparent !important;
-}
 
 // #pagination {
 //   .page-item {
@@ -221,5 +229,6 @@ nav .active {
 
 $primary : #42b983;
 @import "~bootstrap/scss/bootstrap";
+
 
 </style>

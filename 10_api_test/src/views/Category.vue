@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="row d-flex justify-content-center">
-      <div class="col-6">
+      <div class="col-6 animate__animated animate__fadeIn animate__delay-1s">
       <div class="" v-for="v in value" :key="v.id">
         <div class="border-bottom mb-4 pb-4 article-preview">
                 <div class="p-0 p-md-3">
@@ -99,6 +99,25 @@ export default {
       
     };
   },
+  watch:{
+    '$route.params.id': {
+        handler: function(id) {
+            axios.get("http://127.0.0.1:8000/api/category").then((response) => {
+            console.log(response.data);
+
+            this.categories = response.data;
+          });
+
+          axios.get("http://127.0.0.1:8000/api/category/"+this.$route.params.id).then((response) => {
+            console.log(response.data);
+            this.value = response.data.data;
+          });
+        },
+        deep: true,
+        immediate: true
+      }
+
+  },
     mounted() {
 
      axios.get("http://127.0.0.1:8000/api/category").then((response) => {
@@ -113,11 +132,7 @@ export default {
     });
 
   },
-    created() {
 
-     this.data();
-
-  },
 
 
 };

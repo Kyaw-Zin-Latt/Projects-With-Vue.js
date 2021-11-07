@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Detail from '../views/Detail.vue'
+import Search from '../views/Search.vue'
 import Category from '../views/Category.vue'
 
 
@@ -30,6 +31,11 @@ const routes = [
     path: '/category/:id',
     name: 'Category',
     component: Category
+  },
+  {
+    path: '/search/:id',
+    name: 'Search',
+    component: Search
   },
 ]
 

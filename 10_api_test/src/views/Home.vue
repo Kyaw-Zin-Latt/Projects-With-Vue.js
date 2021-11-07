@@ -1,7 +1,12 @@
 <template>
   <div class="home">
     <div class="row d-flex justify-content-center">
-      <div class="col-6">
+      <div class="col-12 d-flex vh-100 justify-content-center align-middle align-items-center" v-if="loading">
+          <div class="spinner-grow h1 text-center" role="status">
+            <span class="sr-only"></span>
+          </div>
+      </div>
+      <div class="col-6 animate__animated animate__fadeIn animate__delay-1s">
       <div class="" v-for="v in value" :key="v.id">
         <div class="border-bottom mb-4 pb-4 article-preview">
                 <div class="p-0 p-md-3">
@@ -44,23 +49,21 @@
       </div>
     </div>
     
-      <div class="col-12 col-lg-4 border-start" id="sidebarColumn">
+      <div class="col-12 col-lg-4 border-start animate__animated animate__fadeIn animate__delay-1s" id="sidebarColumn">
             <div class="position-sticky" style="top: 100px">
                 <div class="mb-5 sidebar">
 
 
                     <div id="search" class="mb-5">
-                        <form action="" method="get">
-                            <div class="d-flex search-box">
-                                <input type="text" class="form-control flex-shrink-1 me-2 search-input" name="search" value="" placeholder="Search Anything">
-                                <button class="btn btn-primary search-btn">
+                        <div class="d-flex search-box">
+                                <input type="text" class="form-control flex-shrink-1 me-2 search-input" name="search" v-model="key" placeholder="Search Anything">
+                                
+                                  <button class="btn btn-primary search-btn" @click="searchPost()">
                                     <i class="feather-search d-block d-xl-none"></i>
                                     <span class="d-none d-xl-block">Search</span>
-                                </button>
+                                  </button>
+                                
                             </div>
-
-                        </form>
-
                     </div>
 
                     <div id="category">
@@ -98,8 +101,17 @@ export default {
     return {
       value: [],
       categories : [],
+      key:"",
+      loading:true
       
     };
+  },
+  methods: {
+    searchPost() {
+        this.$router.push({name : 'Search', params: {id : this.key}})
+        let q = this.key;
+        console.log(q);
+    },
   },
   mounted() {
 
@@ -107,12 +119,18 @@ export default {
       console.log(response.data);
 
       this.value = response.data.data;
+      this.loading = false
     });
+
+    
+
+    http://127.0.0.1:8000/api/articles/web
 
     axios.get("http://127.0.0.1:8000/api/category").then((response) => {
       console.log(response.data);
 
       this.categories = response.data;
+      this.loading = false
     });
 
   },
